@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
-def index(request):
-    return HttpResponse("Hello, world. You're at the reus index.")
+from .models import Post
+
+def frontpage(request):
+	posts = Post.objects.all()
+	return render(request, 'reus/frontpage.html', {'posts': posts})
