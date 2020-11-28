@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+"""
 from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings # new
@@ -25,3 +26,30 @@ urlpatterns = [
 ]
 if settings.DEBUG: # new
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+"""
+
+from django.contrib import admin
+from django.urls import path
+from django.views.generic import TemplateView
+from reus.models import Post
+from django.conf.urls.static import static
+from django.conf import settings
+def getPosts():
+    posts = Post.objects.all()
+    ret = {
+        "main": [],
+        "secondary": []
+    }
+    for post in posts:
+        if(post.main_event == 1):
+            ret["main"].append(post)
+        else:
+            ret["secondary"].append(post)
+    return ret
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', TemplateView.as_view(template_name='reus/frontpage.html', extra_context={
+        "instagram_profile_name": "troy.reus", "main": getPosts()["main"][0], "posts": getPosts()["secondary"],
+    })),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,14 @@
 {% extends 'reus/base.html' %}
+{% load instagram_client %}
 
 {% block content %}
+	<div class="post block">
+		<h2 class="subtitle">{{ main.title }}</h2>
+		<img src="{{main.banner.url}}"/>
+		<h2 class="body">{{ main.body }}</h2>
+		<small>Posted at {{ main.date_added }}</small>
+		<p>{{ main.intro }}</p>
+	</div>
 	{% for post in posts %}
 		<div class="post block">
 			<h2 class="subtitle">{{ post.title }}</h2>
@@ -10,4 +18,6 @@
 			<p>{{ post.intro }}</p>
 		</div>
 	{% endfor %}
+<h1>Instagram Feed </h1>
+{% instagram_recent_media_wall username="troy.reus" %}
 {% endblock %}
