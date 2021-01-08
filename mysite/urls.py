@@ -49,7 +49,7 @@ def getPosts():
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='reus/frontpage.html', extra_context={
-        "instagram_profile_name": "troy.reus", "main": getPosts()["main"][0], "posts": getPosts()["secondary"],
-    })),
+    path('', TemplateView.as_view(template_name='reus/frontpage.html', 
+        extra_context={"main": getPosts()["main"][0], "posts": getPosts()["secondary"],}
+    )),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

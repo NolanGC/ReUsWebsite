@@ -1,5 +1,4 @@
 {% extends 'reus/base.html' %}
-{% load instagram_client %}
 
 {% block content %}
 	<div class="post block">
@@ -18,6 +17,4 @@
 			<p>{{ post.intro }}</p>
 		</div>
 	{% endfor %}
-<h1>Instagram Feed </h1>
-{% instagram_recent_media_wall username="troy.reus" %}
 {% endblock %}
