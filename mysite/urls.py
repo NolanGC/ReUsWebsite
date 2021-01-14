@@ -34,22 +34,15 @@ from django.views.generic import TemplateView
 from reus.models import Post
 from django.conf.urls.static import static
 from django.conf import settings
-def getPosts():
-    posts = Post.objects.all()
-    ret = {
-        "main": [],
-        "secondary": []
-    }
-    for post in posts:
-        if(post.main_event == 1):
-            ret["main"].append(post)
-        else:
-            ret["secondary"].append(post)
-    return ret
+from django.conf.urls import url
+import reus.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='reus/frontpage.html', 
-        extra_context={"main": getPosts()["main"][0], "posts": getPosts()["secondary"],}
-    )),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('', reus.views.index, name="index"),
+    path('index/', reus.views.index, name="index"),
+    url('about/', reus.views.about, name="about"),
+    path('post/<str:title>', reus.views.post, name="post"),
+    url('contact/', reus.views.contact, name="contact"),
+    
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
