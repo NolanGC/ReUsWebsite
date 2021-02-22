@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ReUS</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'quad' %}">Quad</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('/static/img/quad-bg.png')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="site-heading">
+                        <h1 style="opacity: 0.90; background-color:#ffffff; text-align:center; color:black; vertical-align: middle; padding:10px">THE QUAD</h1>
+                        <span class="subheading" style="opacity: 0.90; background-color:#ffffff; color:black; text-align:center; vertical-align: middle; color:black; padding:15px 20px;"> The QUAD is a podcast where highschoolers can learn about career opportunites from people in the field.  </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="text-center">
+            <h1>Upcoming Guest</h1>
+        </div>
+        <div class="container" id="next">
+            <div class="card">
+                <img class="card-img-top" src="{{ next.images.url }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ next.title }}</h5>
+                    <p class="card-text">
+                        {{next.body}}
+                    </p>
+                    <p class="card-text"><small class="text-muted"><i class="fas fa-link"></i><a href="{{next.related_link}}">Zoom Link</a><i class="fas fa-calendar-alt"></i>{{ next.datestr }}</small></p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="text-center">
+            <h1>Previous Guests</h1>
+        </div>
+        <div class="card-columns">
+            {% for prev in previous %}
+            <div class="card">
+                <img class="card-img-top" src="{{ prev.images.url }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ prev.title }}</h5>
+                    <p class="card-text">
+                        {{prev.body}}
+                    </p>
+                    <p class="card-text"><small class="text-muted"><i class="fas fa-link"></i><a href="{{prev.related_link}}">Video Link</a><i class="fas fa-calendar-alt"></i>{{ prev.datestr }}</small></p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/troy.reus/">
+                            <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+                </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; ReUS 2020</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- Custom scripts for this template -->
+<script src="{% static 'js/clean-blog.min.js' %}"></script>
+
+<style>
+    h1 {
+        padding: 10px 0;
+    }
+    
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        border: none;
+    }
+    
+    .text-muted i {
+        margin: 0 10px;
+    }
+    
+    #next {
+        max-width: 50%;
+    }
+    
+    #wrapper {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+</style>

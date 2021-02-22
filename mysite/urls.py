@@ -43,6 +43,6 @@ urlpatterns = [
     path('index/', reus.views.index, name="index"),
     url('about/', reus.views.about, name="about"),
     path('post/<str:title>', reus.views.post, name="post"),
-    url('contact/', reus.views.contact, name="contact"),
+    url('quad/', reus.views.quad, name="quad"),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
